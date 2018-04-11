@@ -1,7 +1,7 @@
 PACKAGE_NAME := github.com/jetstack/cert-manager
-REGISTRY := quay.io/jetstack
+REGISTRY := quay.io/solarwinds
 APP_NAME := cert-manager
-IMAGE_TAGS := canary
+IMAGE_TAGS := 0.2.3-auto-whitelist
 GOPATH ?= $HOME/go
 HACK_DIR ?= hack
 BUILD_TAG := build

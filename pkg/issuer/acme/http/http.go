@@ -35,6 +35,9 @@ const (
 	HTTP01Timeout = time.Minute * 15
 	// acmeSolverListenPort is the port acmesolver should listen on
 	acmeSolverListenPort = 8089
+	// whitelist annotation
+	whitelistAnnotation = "nginx.ingress.kubernetes.io/whitelist-source-range"
+	whitelistValue      = "0.0.0.0/0,::/0"
 )
 
 // svcNameFunc returns the name for the service to solve the challenge
@@ -244,6 +247,7 @@ func (s *Solver) ensureIngressHasRule(ingName string, crt *v1alpha1.Certificate,
 	}
 	if domainCfg.HTTP01.IngressClass != nil {
 		ing.Annotations[class.IngressKey] = *domainCfg.HTTP01.IngressClass
+		ing.Annotations[whitelistAnnotation] = whitelistValue
 	}
 	if ing.Labels == nil {
 		ing.Labels = make(map[string]string)
